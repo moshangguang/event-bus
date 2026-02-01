@@ -469,7 +469,7 @@ func (eventBus *RedisEventBus) Publish(ctx context.Context, event Event, options
 	if err != nil {
 		return err
 	}
-	uid := uuid.New().String()
+	uid := fmt.Sprintf("%s-%s", topic, uuid.New().String())
 	queueKey := GetRedisQueueKey(topic)
 	var score float64
 	pipeline := eventBus.redisClient.Pipeline()
